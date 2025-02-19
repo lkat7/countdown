@@ -19,7 +19,8 @@ body {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 727px;
+    width: 90%;
+    max-width: 727px;
     margin-bottom: 30px;  
   }
   
@@ -32,6 +33,9 @@ body {
   .countdown {
     font-size: 2em;
     font-weight: bold;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
     margin: 20px 0;
     color: #ff72a7;
     display: flex;
