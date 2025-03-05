@@ -1,16 +1,17 @@
 const messages = [
   "i love you so much",
   "omg you're so pretty wth",
-  "you'll eat those exams uppp (and i'll eat you up)",
-  "you gotta lemme take more pics of u",
-  "no way you're still coming back to check this?? mwah ily",
-  "i need you so much",
-  "fuck i miss you",
-  "stay hydrated i love you"
+  "halfway through!! you got thiss",
+  "i hope my fasting is valid.. im thinking about u way too much",
+  "mommy? sorry.. ramadaaann ",
+  "correct ur posture, desto shrimp type shit",
+  "i miss u more than the amount of atoms in the universe",
+  "stay hydrated i love you",
+  "typeshititude",
+  "sit on me mommy",
 ];
 
-function updateCountdown() {
-  const targetDate = new Date("April 3, 2025 00:00:00").getTime();
+function updateCountdown(targetDate, daysId, hoursId, minutesId, secondsId) {
   const now = new Date().getTime();
   const distance = targetDate - now;
 
@@ -19,10 +20,10 @@ function updateCountdown() {
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  document.getElementById("days").innerHTML = days;
-  document.getElementById("hours").innerHTML = hours;
-  document.getElementById("minutes").innerHTML = minutes;
-  document.getElementById("seconds").innerHTML = seconds;
+  document.getElementById(daysId).innerHTML = days;
+  document.getElementById(hoursId).innerHTML = hours;
+  document.getElementById(minutesId).innerHTML = minutes;
+  document.getElementById(secondsId).innerHTML = seconds;
 
   if (distance < 0) {
     clearInterval(countdownInterval);
@@ -32,13 +33,51 @@ function updateCountdown() {
 
 function updateMessage() {
   const today = new Date();
-  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+  const dayOfYear = Math.floor(
+    (today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24)
+  );
   const messageIndex = dayOfYear % messages.length;
   document.getElementById("message").innerHTML = messages[messageIndex];
 }
 
-const countdownInterval = setInterval(updateCountdown, 1000);
+// Target Dates
+const targetDate1 = new Date("April 3, 2025 00:00:00").getTime();
+const targetDate2 = new Date("March 10, 2025 00:00:00").getTime();
+
+// Update both countdowns every second
+const countdownInterval = setInterval(() => {
+  updateCountdown(targetDate1, "days", "hours", "minutes", "seconds");
+  updateCountdown(targetDate2, "days2", "hours2", "minutes2", "seconds2");
+}, 1000);
+
+// Initial Update
+updateCountdown(targetDate1, "days", "hours", "minutes", "seconds");
+updateCountdown(targetDate2, "days2", "hours2", "minutes2", "seconds2");
 updateMessage();
 
+// Background music settings
 const backgroundMusic = document.getElementById("background-music");
-    backgroundMusic.volume = 0.15; 
+backgroundMusic.volume = 0.15;
+
+// Easter Egg Button Animation
+const button = document.getElementById("easteregg");
+
+const animateMove = (element, prop, pixels) => 
+  anime({
+    targets: element,
+    [prop]: `${pixels}px`,
+    duration: 500,
+    easing: "easeOutCirc",
+  });
+
+["mouseover", "click"].forEach(function (eventType) {
+  button.addEventListener(eventType, function () {
+    const top = getRandomNumber(window.innerHeight - this.offsetHeight);
+    const left = getRandomNumber(window.innerWidth - this.offsetWidth);
+
+    animateMove(this, "top", top).play();
+    animateMove(this, "left", left).play();
+  });
+});
+
+const getRandomNumber = (max) => Math.floor(Math.random() * max);
