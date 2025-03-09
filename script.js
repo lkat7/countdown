@@ -27,7 +27,7 @@ function updateCountdown(targetDate, daysId, hoursId, minutesId, secondsId) {
 
   if (distance < 0) {
     clearInterval(countdownInterval);
-    document.querySelector(".container").innerHTML = "<h1>ilysmm</h1>";
+    document.querySelector(".container").innerHTML = "<h1>HAPPY BIRTHDAYY!!!!</h1>";
   }
 }
 
@@ -59,25 +59,3 @@ updateMessage();
 const backgroundMusic = document.getElementById("background-music");
 backgroundMusic.volume = 0.15;
 
-// Easter Egg Button Animation
-const button = document.getElementById("easteregg");
-
-const animateMove = (element, prop, pixels) => 
-  anime({
-    targets: element,
-    [prop]: `${pixels}px`,
-    duration: 500,
-    easing: "easeOutCirc",
-  });
-
-["mouseover", "click"].forEach(function (eventType) {
-  button.addEventListener(eventType, function () {
-    const top = getRandomNumber(window.innerHeight - this.offsetHeight);
-    const left = getRandomNumber(window.innerWidth - this.offsetWidth);
-
-    animateMove(this, "top", top).play();
-    animateMove(this, "left", left).play();
-  });
-});
-
-const getRandomNumber = (max) => Math.floor(Math.random() * max);
